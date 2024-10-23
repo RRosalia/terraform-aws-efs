@@ -77,7 +77,7 @@ resource "aws_efs_access_point" "default" {
   }
 
   root_directory {
-    path = "/${each.key}"
+    path = var.access_points[each.key]["creation_info"]["root_directory"]
 
     dynamic "creation_info" {
       for_each = try(var.access_points[each.key]["creation_info"]["gid"], "") != "" ? ["true"] : []
